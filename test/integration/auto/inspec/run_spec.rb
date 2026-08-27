@@ -5,5 +5,5 @@ end
 
 describe command('etcdutl version') do
   its(:exit_status) { should eq 0 }
-  its(:stdout) { should match(/^etcdutl version: 3.6.6/) }
+  its(:stdout) { should match(/^etcdutl version: 3.7.1/) }
 end

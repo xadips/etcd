@@ -6,7 +6,7 @@ property :default_service_name,
 
 property :version,
           String,
-          default: '3.6.6',
+          default: '3.7.1',
           desired_state: false
 
 # https://coreos.com/etcd/docs/latest/configuration.html

@@ -166,7 +166,7 @@ The `etcd_installation_docker` resource uses the `docker_image` resource to pull
 
 - `repo` - The image name to pull. Defaults to 'quay.io/coreos/etcd'
 - `tag` - The image tag to pull.
-- `version` - String used to calculate tag string when tag is omitted. Defaults to '2.3.7'
+- `version` - String used to calculate tag string when tag is omitted. Shares the `etcd_service`/`etcd_installation_binary` default (currently '3.7.1')
 
 ### etcd_service_manager
 
@@ -217,7 +217,7 @@ end
 
 - repo - defaults to 'quay.io/coreos/etcd'
 - tag - default calculated from version
-- version - defaults to '3.2.15',
+- version - shares the `etcd_service`/`etcd_installation_binary` default (currently '3.7.1')
 - container_name - defaults to resource name
 - port - defaults to ['2379/tcp4:2379', '2380/tcp4:2380']
 - host_data_path - Path to store data locally on the host, which will be mounted into the container
@@ -263,8 +263,8 @@ The `etcd_service` resource property list corresponds to the options found in
 - `initial_cluster_state`
 - `initial_cluster_token`
 - `advertise_client_urls`
-- `discovery`
-- `discovery_srv`
+- `discovery` (removed in v3.7 - legacy v2 discovery service; use `discovery_srv` or the Discovery v3 properties below instead)
+- `discovery_srv` (DNS SRV bootstrap, unaffected by the v3.7 removal of `discovery`)
 - `discovery_fallback` (removed in v3.6)
 - `discovery_proxy` (removed in v3.6)
 - `strict_reconfig_check`

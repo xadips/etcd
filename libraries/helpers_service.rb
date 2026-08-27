@@ -10,6 +10,11 @@ module EtcdCookbook
         Gem::Version.new(new_resource.version) >= Gem::Version.new('3.6.0')
       end
 
+      def etcd_version_37_or_higher?
+        return false unless new_resource.version
+        Gem::Version.new(new_resource.version) >= Gem::Version.new('3.7.0')
+      end
+
       def etcd_cmd
         if new_resource.config_file.nil?
           [etcd_bin, etcd_daemon_opts].join(' ').strip
@@ -104,6 +109,7 @@ module EtcdCookbook
       def etcd_daemon_opts
         opts = []
         is_v36_or_higher = etcd_version_36_or_higher?
+        is_v37_or_higher = etcd_version_37_or_higher?
 
         opts << "-name=#{new_resource.node_name}" unless new_resource.node_name.nil?
         opts << "-advertise-client-urls=#{new_resource.advertise_client_urls}" unless new_resource.advertise_client_urls.nil?
@@ -126,7 +132,8 @@ module EtcdCookbook
         opts << "-enable-v2=#{new_resource.enable_v2}" unless is_v36_or_higher
 
         opts << "-discovery-srv=#{new_resource.discovery_srv}" unless new_resource.discovery_srv.nil?
-        opts << "-discovery=#{new_resource.discovery}" unless new_resource.discovery.nil?
+        # Legacy v2 discovery flag (removed in v3.7)
+        opts << "-discovery=#{new_resource.discovery}" if !new_resource.discovery.nil? && !is_v37_or_higher
 
         # Discovery v3 flags (v3.6+)
         if is_v36_or_higher

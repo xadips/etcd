@@ -62,6 +62,7 @@ end
 
 def default_checksum
   case version
+  when '3.7.1' then 'e8cd3fa8064c98137c5dbd78b76f969417ace84efb83c481041d7a52ffdd8fb9'
   when '3.6.6' then '887afaa4a99f22d802ccdfbe65730a5e79aa5c9ce2c8799c67e9d804c50ecedb'
   when '3.5.21' then 'adddda4b06718e68671ffabff2f8cee48488ba61ad82900e639d108f2148501c'
   when '3.4.6' then 'a591b59639aed73061281d34720725ed47092705f68c7b11e0b6965044d4f7f6'
