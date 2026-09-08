@@ -7,6 +7,10 @@ name: ci
     branches:
       - main
 
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
@@ -14,7 +18,7 @@ jobs:
   lint-unit:
     uses: sous-chefs/.github/.github/workflows/lint-unit.yml@6.0.0
     with:
-      gems: chef-cli
+      gems: chef-cli docker-api
     permissions:
       actions: write
       checks: write
