@@ -10,6 +10,8 @@ Standardise files with files in sous-chefs/repo-management
 
 ## Unreleased
 
+* Complete the custom resource migration: v3 key management, reliable service lifecycle and teardown, verified ARM64 binaries, Policyfile dependencies, ChefSpec coverage and Dokken CI. See migration.md for breaking changes.
+
 ### Added
 
 * Support for etcd 3.7.1

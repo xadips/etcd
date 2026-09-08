@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module EtcdCookbook
   module EtcdHelpers
     module Service
       def etcd_bin
-        '/usr/bin/etcd'
+        new_resource.etcd_bin
       end
 
       def etcd_version_36_or_higher?
@@ -37,7 +39,8 @@ module EtcdCookbook
           owner new_resource.run_user
           cookbook 'etcd'
           group 'root'
-          mode '0750'
+          mode '0600'
+          sensitive true
           variables instance_name: new_resource.node_name,
                     version: new_resource.version,
                     data_dir: new_resource.data_dir,
