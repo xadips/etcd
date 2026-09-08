@@ -142,11 +142,11 @@ module EtcdCookbook
         if is_v36_or_higher
           opts << "-discovery-token=#{new_resource.discovery_token}" unless new_resource.discovery_token.nil?
           opts << "-discovery-endpoints=#{new_resource.discovery_endpoints}" unless new_resource.discovery_endpoints.nil?
-          opts << "-discovery-dial-timeout=#{new_resource.discovery_dial_timeout}" unless new_resource.discovery_dial_timeout.nil?
-          opts << "-discovery-request-timeout=#{new_resource.discovery_request_timeout}" unless new_resource.discovery_request_timeout.nil?
-          opts << "-discovery-keepalive-time=#{new_resource.discovery_keepalive_time}" unless new_resource.discovery_keepalive_time.nil?
-          opts << "-discovery-keepalive-timeout=#{new_resource.discovery_keepalive_timeout}" unless new_resource.discovery_keepalive_timeout.nil?
-          opts << '-discovery-insecure-transport=true' if new_resource.discovery_insecure_transport == true
+          opts << "-discovery-dial-timeout=#{new_resource.discovery_dial_timeout}ns" unless new_resource.discovery_dial_timeout.nil?
+          opts << "-discovery-request-timeout=#{new_resource.discovery_request_timeout}ns" unless new_resource.discovery_request_timeout.nil?
+          opts << "-discovery-keepalive-time=#{new_resource.discovery_keepalive_time}ns" unless new_resource.discovery_keepalive_time.nil?
+          opts << "-discovery-keepalive-timeout=#{new_resource.discovery_keepalive_timeout}ns" unless new_resource.discovery_keepalive_timeout.nil?
+          opts << "-discovery-insecure-transport=#{new_resource.discovery_insecure_transport}" unless new_resource.discovery_insecure_transport.nil?
           opts << '-discovery-insecure-skip-tls-verify=true' if new_resource.discovery_insecure_skip_tls_verify == true
           opts << "-discovery-cert=#{new_resource.discovery_cert}" unless new_resource.discovery_cert.nil?
           opts << "-discovery-key=#{new_resource.discovery_key}" unless new_resource.discovery_key.nil?

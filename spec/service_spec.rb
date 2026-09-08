@@ -6,6 +6,32 @@ describe 'etcd_service_manager_systemd' do
   platform 'ubuntu', '24.04'
   step_into :etcd_service_manager_systemd
 
+  context 'configuring secure discovery' do
+    recipe do
+      etcd_service_manager_systemd 'discovery' do
+        discovery_endpoints 'https://discovery.example:2379'
+        discovery_dial_timeout 1_000_000_000
+        discovery_request_timeout 2_000_000_000
+        discovery_keepalive_time 3_000_000_000
+        discovery_keepalive_timeout 4_000_000_000
+        discovery_insecure_transport false
+      end
+    end
+
+    it 'passes duration units to the etcd CLI' do
+      command = chef_run.systemd_unit('etcd-discovery.service').content[:Service][:ExecStart]
+      expect(command).to include('-discovery-dial-timeout=1000000000ns')
+      expect(command).to include('-discovery-request-timeout=2000000000ns')
+      expect(command).to include('-discovery-keepalive-time=3000000000ns')
+      expect(command).to include('-discovery-keepalive-timeout=4000000000ns')
+    end
+
+    it 'explicitly disables insecure discovery transport' do
+      command = chef_run.systemd_unit('etcd-discovery.service').content[:Service][:ExecStart]
+      expect(command).to include('-discovery-insecure-transport=false')
+    end
+  end
+
   context 'stopping an instance' do
     recipe do
       etcd_service_manager_systemd 'example' do

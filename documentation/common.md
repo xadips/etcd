@@ -84,3 +84,5 @@ Shared by the installation, service and service manager resources. Most properti
 | `etcd_bin` | `String` | `'/usr/bin/etcd'` |
 
 `discovery` is omitted for 3.7+. `discovery_srv` remains supported. `auto_restart` restarts systemd after managed unit or configuration changes. `config_file` selects YAML configuration instead of flags.
+
+Discovery timeout and keepalive properties are integer nanoseconds. The CLI helper adds the `ns` unit; YAML configuration retains the integer value. Set `discovery_insecure_transport false` to require TLS for discovery connections.
