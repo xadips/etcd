@@ -8,22 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
-## Unreleased
-
-* Complete the custom resource migration: v3 key management, reliable service lifecycle and teardown, verified ARM64 binaries, Policyfile dependencies, ChefSpec coverage and Dokken CI. See migration.md for breaking changes.
-
-### Added
-
-* Support for etcd 3.7.1
-
-### Changed
-
-* Default etcd version updated from 3.6.6 to 3.7.1
-
-### Removed
-
-* `discovery` property/flag (legacy v2 discovery, removed in etcd v3.7) - `discovery-srv` is unaffected and remains supported
-
 ## [11.2.0](https://github.com/sous-chefs/etcd/compare/v11.1.1...v11.2.0) (2025-12-16)
 
 
