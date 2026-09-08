@@ -5,8 +5,13 @@ etcd_installation_binary 'default'
 
 docker_service 'default' do
   storage_driver 'vfs'
+  if platform_family?('suse')
+    install_method 'package'
+    package_name 'docker'
+    setup_docker_repo false
+  end
   package_options value_for_platform_family(
-                    %w(rhel fedora) => '--allowerasing', # dnf platforms
+                    'rhel' => '--allowerasing', # dnf platforms
                     'debian' => "--force-yes -o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-all'",
                     'default' => nil # anything else
                   )

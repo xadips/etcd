@@ -27,3 +27,5 @@
 * Cinc images require `/opt/cinc/bin/cinc-client` in Dokken. Both the default and Docker suites have passed locally on Ubuntu 24.04 ARM64 with zero updates on the second converge.
 * etcdctl uses `version` rather than `--version`. Lease inspection JSON names its original duration `granted-ttl`, unlike the protobuf field name. Keep regression coverage for these command contracts.
 * CI tests all configured suite/platform combinations. Workstation remains pinned through install-workstation@6.0.0; the lint runner needs chef-cli for ChefSpec Policyfile support.
+
+* Docker test fixtures use the distribution package on openSUSE because get.docker.com rejects that distribution. Do not pass --allowerasing as a global option on Fedora's DNF5. These are test-daemon setup constraints, not reasons to remove etcd platform support.

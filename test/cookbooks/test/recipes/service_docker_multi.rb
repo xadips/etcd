@@ -8,6 +8,11 @@ end
 # docker_service for the containers to run in
 docker_service 'default' do
   storage_driver 'vfs'
+  if platform_family?('suse')
+    install_method 'package'
+    package_name 'docker'
+    setup_docker_repo false
+  end
 end
 
 # Make sure we have the image
